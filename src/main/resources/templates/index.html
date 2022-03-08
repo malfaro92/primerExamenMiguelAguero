@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>ITicket</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/frontend.css">
+    </head>
+    <body class="container">
+        <div class="navbar">
+                
+                <img src="images/ITicket.png" class="logo">   
+                
+        </div>
+        <h2> Conciertos</h2>
+        <a th:href="@{/nuevoConcierto}"> Nuevo Concierto</a>
+        <div th:if="${conciertos != null and !conciertos.empty}">
+           <table border="1">
+            <thead>
+                <tr>
+                    <th>Artista</th>
+                    <th>Costo</th>
+                    <th>Fecha</th>
+                    <th>Capacidad Maxima</th>
+                    <th>Lugar</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="concierto : ${conciertos}">
+                    <td th:text="${concierto.artista}"></td>
+                    <td th:text="${concierto.costo}"></td>
+                    <td th:text="${concierto.fecha}"></td>
+                    <td th:text="${concierto.capacidad_maxima}"></td>
+                    <td th:text="${concierto.lugar}"></td>
+                    <td><a th:href="@{/eliminarConcierto/} + ${concierto.idconcierto}">Eliminar</a></td>
+                    <td><a th:href="@{/modificarConcierto/} + ${concierto.idconcierto}">Modificar</a></td>
+                </tr>
+            </tbody>
+           </table>
+        </div>
+        <div th:if="${conciertos == null or conciertos.empty}">
+            No tenemos lista de conciertos que mostrar...
+        </div>  
+        <footer th:replace="layout/template :: footer"/>
+            
+        
+    </body>
+</html>
